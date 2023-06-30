@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="alerts d-flex justify-content-center mt-2">
+  <div class="alert alert-danger" *ngIf="error">
+    <p>{{ error }}</p>
+    <button class="btn btn-danger" (click)="onHandleError()">Okay</button>
+  </div>
+  <div class="alert alert-success" *ngIf="!isLoginMode && isSignupSuccess">
+    <p>Signup Successful!</p>
+    <button class="btn btn-success" (click)="onSignupSuccess()">Login</button>
+  </div>
+</div>
+<div class="container">
+  <div class="login form" *ngIf="!isLoading">
+    <header>
+      {{ isLoginMode ? "Login to Workhub" : "Sign Up for Workhub" }}
+    </header>
+    <form
+      #authForm="ngForm"
+      (ngSubmit)="onSubmit(authForm)"
+      class="form-standard"
+    >
+      <label for="username">{{
+        isLoginMode ? "Email/Username" : "Username"
+      }}</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="{{
+          isLoginMode ? 'Enter you Email/Username' : 'Enter your Email'
+        }}"
+        ngModel
+        required
+      />
+
+      <div *ngIf="!isLoginMode">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          email
+          ngModel
+          required
+        />
+      </div>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Enter your password"
+        required
+        ngModel
+        minlength="{{isLoginMode ? '0' : '6'}}"
+      />
+      <button type="submit" [disabled]="!authForm.valid">
+        {{ isLoginMode ? "Login" : "Sign Up" }}
+      </button>
+    </form>
+    <div class="signup">
+      <span class="signup"
+        >{{
+          isLoginMode ? "Don't have an account?" : "Already have an account?"
+        }}
+        <label (click)="onSwitchMode(authForm)">{{
+          isLoginMode ? "Sign Up" : "Login"
+        }}</label>
+      </span>
+    </div>
+  </div>
+</div>
