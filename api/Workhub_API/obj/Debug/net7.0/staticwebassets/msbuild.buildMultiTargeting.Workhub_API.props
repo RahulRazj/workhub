@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Workhub_API.props" />
+</Project>

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ioPlwKrXaEW9KxQw/HmeRB7Fu+NfTy6S0qEM+BIge5k=",
+  "Source": "Workhub_API",
+  "BasePath": "_content/Workhub_API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
