@@ -1,0 +1,123 @@
+<app-header></app-header>
+<main class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-md-2 m-4">
+      <app-profile></app-profile>
+    </div>
+
+    <!-- Food Menu Section -->
+    <div class="col-md-9 mt-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-center">Food Menu</h4>
+          <div class="row">
+            <div class="table-responsive">
+              <form #orderForm="ngForm" (ngSubmit)="onOrder(orderForm)">
+                <table class="table text-center">
+                  <thead>
+                    <tr>
+                      <th>Days</th>
+                      <th>Breakfast</th>
+                      <th>Lunch</th>
+                      <!-- <th>Clear Selection</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let day of days">
+                      <td class="align-middle">{{ day }}</td>
+
+                      <ng-container *ngFor="let key of orderKeys">
+                        <td class="align-middle">
+                          <div
+                            class="form-check form-check-inline"
+                            [ngSwitch]="orderObject[key].type"
+                          >
+                            <div
+                              *ngFor="let option of orderObject[key].options"
+                            >
+                              <input
+                                class="form-check-input"
+                                type="checkbox"
+                                ngModel
+                                *ngSwitchCase="'checkbox'"
+                                name="{{ day + '-' + key + '-' + option }}"
+                                id="{{ option }}"
+                              />
+
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                *ngSwitchCase="'radio'"
+                                name="{{
+                                  orderObject[key].multiSelect
+                                    ? day + '-' + key + '-' + option
+                                    : day + '-' + key
+                                }}"
+                              />
+
+                              <label class="form-check-label" *ngIf="orderObject[key].type == 'checkbox' || orderObject[key].type == 'radio'">
+                                {{ option }}
+                              </label>
+                            </div>
+
+                            <div class="ml-auto p-2" *ngSwitchCase="'dropdown'">
+                              <div class="dropdown">
+                                <button
+                                  class="btn btn-secondary dropdown-toggle"
+                                  type="button"
+                                  id="imageDropdown"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                >
+                                  Menu Options
+                                </button>
+
+                                <ul
+                                  class="dropdown-menu dropdown-menu-end"
+                                  aria-labelledby="dropdownMenuButton1"
+                                >
+                                  <li
+                                    *ngFor="
+                                      let option of orderObject[key].options
+                                    "
+                                  >
+                                    <div
+                                      class="form-check form-check-inline mx-2"
+                                    >
+                                      <input
+                                        class="form-check-input"
+                                        ngModel
+                                        type="checkbox"
+                                        name="{{
+                                          day + '-' + key + '-' + option
+                                        }}"
+                                        id="{{ option }}"
+                                      />
+
+                                      <label class="form-check-label">
+                                        {{ option }}
+                                      </label>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </ng-container>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row mt-4">
+                  <div class="col">
+                    <button class="btn btn-primary">Place Order</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,81 @@
+<app-header></app-header>
+
+<main class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-md-2 m-4">
+      <app-profile></app-profile>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="col-md-8 mt-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Food Ordering Chart</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4 justify-content-end">
+    <!-- Date Range Selection -->
+    <div class="col-md-3 mx-4">
+      <div class="form-group">
+        <label for="dateRange">Select Date Range:</label>
+        <div class="input-daterange input-group" id="dateRange">
+          <input
+            type="date"
+            class="form-control"
+            name="start"
+            placeholder="Start Date"
+          />
+          <div class="input-group-prepend input-group-append">
+            <span class="input-group-text">to</span>
+          </div>
+          <input
+            type="date"
+            class="form-control"
+            name="end"
+            placeholder="End Date"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-4">
+    <!-- Tabular View -->
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center">Date</th>
+            <th class="text-center">Day</th>
+            <th class="text-center">Breakfast(Veg/Non-Veg)</th>
+            <th class="text-center">Lunch(Veg/Non-Veg)</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let order of orders">
+          <ng-container *ngFor="let day of order.order">
+            <tr>
+              <td class="text-center">{{ order.date.toLocaleString() }}</td>
+              <td class="text-center">{{day.dayName}}</td>
+              <td class="text-center">
+                <i
+                  class="bi bi-circle-fill"
+                  [style.color]="day.breakfast ? day.breakfast == 'Veg' ? 'green' : 'red' : 'black'"
+                ></i>
+              </td>
+              <td class="text-center">
+                <i
+                  class="bi bi-circle-fill"
+                  [style.color]="day.lunch ? day.lunch == 'Veg' ? 'green' : 'red' : 'black'"
+                ></i>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <!-- Pagination goes here -->
+    </div>
+  </div>
+</main>

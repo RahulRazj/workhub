@@ -1,0 +1,21 @@
+.navbar {
+    padding: 0 30px
+}
+
+
+.nav-link:after {
+    transition: all ease-in-out .4s;
+    background: none repeat scroll 0 0 black;
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+}
+.nav-link:hover:after {
+    width: 100%;
+}
+
+.nav-item {
+    font-size: 22px;
+    padding: 8px;
+}
